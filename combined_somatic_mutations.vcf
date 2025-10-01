@@ -1,0 +1,796 @@
+##fileformat=VCFv4.2
+##FILTER=<ID=FAIL,Description="Fail the site if all alleles fail but for different reasons.">
+##FILTER=<ID=PASS,Description="Site contains at least one allele that passes filters">
+##FILTER=<ID=base_qual,Description="alt median base quality">
+##FILTER=<ID=clustered_events,Description="Clustered events observed in the tumor">
+##FILTER=<ID=contamination,Description="contamination">
+##FILTER=<ID=duplicate,Description="evidence for alt allele is overrepresented by apparent duplicates">
+##FILTER=<ID=fragment,Description="abs(ref - alt) median fragment length">
+##FILTER=<ID=germline,Description="Evidence indicates this site is germline, not somatic">
+##FILTER=<ID=haplotype,Description="Variant near filtered variant on same haplotype.">
+##FILTER=<ID=low_allele_frac,Description="Allele fraction is below specified threshold">
+##FILTER=<ID=map_qual,Description="ref - alt median mapping quality">
+##FILTER=<ID=multiallelic,Description="Site filtered because too many alt alleles pass tumor LOD">
+##FILTER=<ID=n_ratio,Description="Ratio of N to alt exceeds specified ratio">
+##FILTER=<ID=normal_artifact,Description="artifact_in_normal">
+##FILTER=<ID=orientation,Description="orientation bias detected by the orientation bias mixture model">
+##FILTER=<ID=panel_of_normals,Description="Blacklisted site in panel of normals">
+##FILTER=<ID=position,Description="median distance of alt variants from end of reads">
+##FILTER=<ID=possible_numt,Description="Allele depth is below expected coverage of NuMT in autosome">
+##FILTER=<ID=slippage,Description="Site filtered due to contraction of short tandem repeat region">
+##FILTER=<ID=strand_bias,Description="Evidence for alt allele comes from one read direction only">
+##FILTER=<ID=strict_strand,Description="Evidence for alt allele is not represented in both directions">
+##FILTER=<ID=weak_evidence,Description="Mutation does not meet likelihood threshold">
+##FORMAT=<ID=AD,Number=R,Type=Integer,Description="Allelic depths for the ref and alt alleles in the order listed">
+##FORMAT=<ID=AF,Number=A,Type=Float,Description="Allele fractions of alternate alleles in the tumor">
+##FORMAT=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth (reads with MQ=255 or with bad mates are filtered)">
+##FORMAT=<ID=F1R2,Number=R,Type=Integer,Description="Count of reads in F1R2 pair orientation supporting each allele">
+##FORMAT=<ID=F2R1,Number=R,Type=Integer,Description="Count of reads in F2R1 pair orientation supporting each allele">
+##FORMAT=<ID=FAD,Number=R,Type=Integer,Description="Count of fragments supporting each allele.">
+##FORMAT=<ID=GQ,Number=1,Type=Integer,Description="Genotype Quality">
+##FORMAT=<ID=GT,Number=1,Type=String,Description="Genotype">
+##FORMAT=<ID=PGT,Number=1,Type=String,Description="Physical phasing haplotype information, describing how the alternate alleles are phased in relation to one another; will always be heterozygous and is not intended to describe called alleles">
+##FORMAT=<ID=PID,Number=1,Type=String,Description="Physical phasing ID information, where each unique ID within a given sample (but not across samples) connects records within a phasing group">
+##FORMAT=<ID=PL,Number=G,Type=Integer,Description="Normalized, Phred-scaled likelihoods for genotypes as defined in the VCF specification">
+##FORMAT=<ID=PS,Number=1,Type=Integer,Description="Phasing set (typically the position of the first variant in the set)">
+##FORMAT=<ID=SB,Number=4,Type=Integer,Description="Per-sample component statistics which comprise the Fisher's Exact Test to detect strand bias.">
+##GATKCommandLine=<ID=FilterMutectCalls,CommandLine="FilterMutectCalls --output filtered_mutect2_output.vcf --variant mutect2_output.vcf --reference GCF_000001405.40_GRCh38.p14_genomic.fna --threshold-strategy OPTIMAL_F_SCORE --f-score-beta 1.0 --false-discovery-rate 0.05 --initial-threshold 0.1 --mitochondria-mode false --microbial-mode false --max-events-in-region 3 --max-events-in-haplotype 2 --max-alt-allele-count 1 --unique-alt-read-count 0 --min-median-mapping-quality -1 --min-median-base-quality 20 --max-median-fragment-length-difference 10000 --min-median-read-position 1 --max-n-ratio Infinity --min-reads-per-strand 0 --min-allele-fraction 0.0 --contamination-estimate 0.0 --log-snv-prior -13.815510557964275 --log-indel-prior -16.11809565095832 --log-artifact-prior -2.302585092994046 --normal-p-value-threshold 0.001 --min-slippage-length 8 --pcr-slippage-rate 0.1 --distance-on-haplotype 100 --long-indel-length 5 --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-index true --create-output-variant-md5 false --max-variants-per-shard 0 --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false",Version="4.6.1.0",Date="January 17, 2025, 10:58:40?PM IST">
+##GATKCommandLine=<ID=Mutect2,CommandLine="Mutect2 --normal-sample PA221MH-lib09-P19-Norm_S1_L001 --panel-of-normals /data/ankita/PB/project2/normal_sample.vcf --output mutect2_output.vcf --input PA220KH-lib09-P19-Tumor_S2_L001/PA220KH-lib09-P19-Tumor_S2_L001_deduplicated.bam --input PA221MH-lib09-P19-Norm_S1_L001/PA221MH-lib09-P19-Norm_S1_L001_deduplicated.bam --reference GCF_000001405.40_GRCh38.p14_genomic.fna --f1r2-median-mq 50 --f1r2-min-bq 20 --f1r2-max-depth 200 --flow-likelihood-parallel-threads 0 --flow-likelihood-optimized-comp false --trim-to-haplotype true --exact-matching false --flow-use-t0-tag false --flow-remove-non-single-base-pair-indels false --flow-remove-one-zero-probs false --flow-quantization-bins 121 --flow-fill-empty-bins-value 0.001 --flow-symmetric-indel-probs false --flow-report-insertion-or-deletion false --flow-disallow-probs-larger-than-call false --flow-lump-probs false --flow-retain-max-n-probs-base-format false --flow-probability-scaling-factor 10 --flow-order-cycle-length 4 --keep-boundary-flows false --genotype-pon-sites false --genotype-germline-sites false --af-of-alleles-not-in-resource -1.0 --mitochondria-mode false --mutect3-training-mode false --mutect3-ref-downsample 10 --mutect3-alt-downsample 20 --mutect3-non-artifact-ratio 1 --mutect3-dataset-mode ILLUMINA --tumor-lod-to-emit 3.0 --initial-tumor-lod 2.0 --pcr-snv-qual 40 --pcr-indel-qual 40 --base-qual-correction-factor 5 --max-population-af 0.01 --downsampling-stride 1 --callable-depth 10 --max-suspicious-reads-per-alignment-start 0 --normal-lod 2.2 --ignore-itr-artifacts false --gvcf-lod-band -2.5 --gvcf-lod-band -2.0 --gvcf-lod-band -1.5 --gvcf-lod-band -1.0 --gvcf-lod-band -0.5 --gvcf-lod-band 0.0 --gvcf-lod-band 0.5 --gvcf-lod-band 1.0 --minimum-allele-fraction 0.0 --independent-mates false --flow-mode NONE --disable-adaptive-pruning false --kmer-size 10 --kmer-size 25 --dont-increase-kmer-sizes-for-cycles false --allow-non-unique-kmers-in-ref false --num-pruning-samples 1 --min-dangling-branch-length 4 --recover-all-dangling-branches false --max-num-haplotypes-in-population 128 --min-pruning 2 --adaptive-pruning-initial-error-rate 0.001 --pruning-lod-threshold 2.302585092994046 --pruning-seeding-lod-threshold 9.210340371976184 --max-unpruned-variants 100 --linked-de-bruijn-graph false --disable-artificial-haplotype-recovery false --enable-legacy-graph-cycle-detection false --debug-assembly false --debug-graph-transformations false --capture-assembly-failure-bam false --num-matching-bases-in-dangling-end-to-recover -1 --error-correction-log-odds -Infinity --error-correct-reads false --kmer-length-for-read-error-correction 25 --min-observations-for-kmer-to-be-solid 20 --likelihood-calculation-engine PairHMM --base-quality-score-threshold 18 --dragstr-het-hom-ratio 2 --dont-use-dragstr-pair-hmm-scores false --pair-hmm-gap-continuation-penalty 10 --expected-mismatch-rate-for-read-disqualification 0.02 --pair-hmm-implementation FASTEST_AVAILABLE --pcr-indel-model CONSERVATIVE --phred-scaled-global-read-mismapping-rate 45 --disable-symmetric-hmm-normalizing false --disable-cap-base-qualities-to-map-quality false --enable-dynamic-read-disqualification-for-genotyping false --dynamic-read-disqualification-threshold 1.0 --native-pair-hmm-threads 4 --native-pair-hmm-use-double-precision false --flow-hmm-engine-min-indel-adjust 6 --flow-hmm-engine-flat-insertion-penatly 45 --flow-hmm-engine-flat-deletion-penatly 45 --pileup-detection false --use-pdhmm false --use-pdhmm-overlap-optimization false --make-determined-haps-from-pd-code false --print-pileupcalling-status false --fallback-gga-if-pdhmm-fails true --pileup-detection-enable-indel-pileup-calling false --pileup-detection-active-region-phred-threshold 0.0 --num-artificial-haplotypes-to-add-per-allele 5 --artifical-haplotype-filtering-kmer-size 10 --pileup-detection-snp-alt-threshold 0.1 --pileup-detection-indel-alt-threshold 0.1 --pileup-detection-absolute-alt-depth 0.0 --pileup-detection-snp-adjacent-to-assembled-indel-range 5 --pileup-detection-snp-basequality-filter 12 --pileup-detection-bad-read-tolerance 0.0 --pileup-detection-proper-pair-read-badness true --pileup-detection-edit-distance-read-badness-threshold 0.08 --pileup-detection-chimeric-read-badness true --pileup-detection-template-mean-badness-threshold 0.0 --pileup-detection-template-std-badness-threshold 0.0 --pileup-detection-filter-assembly-alt-bad-read-tolerance 0.0 --pileup-detection-edit-distance-read-badness-for-assembly-filtering-threshold 0.12 --bam-writer-type CALLED_HAPLOTYPES --dont-use-soft-clipped-bases false --override-fragment-softclip-check false --min-base-quality-score 10 --smith-waterman FASTEST_AVAILABLE --emit-ref-confidence NONE --max-mnp-distance 1 --force-call-filtered-alleles false --reference-model-deletion-quality 30 --soft-clip-low-quality-ends false --allele-informative-reads-overlap-margin 2 --smith-waterman-dangling-end-match-value 25 --smith-waterman-dangling-end-mismatch-penalty -50 --smith-waterman-dangling-end-gap-open-penalty -110 --smith-waterman-dangling-end-gap-extend-penalty -6 --smith-waterman-haplotype-to-reference-match-value 200 --smith-waterman-haplotype-to-reference-mismatch-penalty -150 --smith-waterman-haplotype-to-reference-gap-open-penalty -260 --smith-waterman-haplotype-to-reference-gap-extend-penalty -11 --smith-waterman-read-to-haplotype-match-value 10 --smith-waterman-read-to-haplotype-mismatch-penalty -15 --smith-waterman-read-to-haplotype-gap-open-penalty -30 --smith-waterman-read-to-haplotype-gap-extend-penalty -5 --flow-assembly-collapse-hmer-size 0 --flow-assembly-collapse-partial-mode false --flow-filter-alleles false --flow-filter-alleles-qual-threshold 30.0 --flow-filter-alleles-sor-threshold 3.0 --flow-filter-lone-alleles false --flow-filter-alleles-debug-graphs false --min-assembly-region-size 50 --max-assembly-region-size 300 --active-probability-threshold 0.002 --max-prob-propagation-distance 50 --force-active false --assembly-region-padding 100 --padding-around-indels 75 --padding-around-snps 20 --padding-around-strs 75 --max-extension-into-assembly-region-padding-legacy 25 --max-reads-per-alignment-start 50 --enable-legacy-assembly-region-trimming false --interval-set-rule UNION --interval-padding 0 --interval-exclusion-padding 0 --interval-merging-rule ALL --read-validation-stringency SILENT --seconds-between-progress-updates 10.0 --disable-sequence-dictionary-validation false --create-output-bam-index true --create-output-bam-md5 false --create-output-variant-index true --create-output-variant-md5 false --max-variants-per-shard 0 --lenient false --add-output-sam-program-record true --add-output-vcf-command-line true --cloud-prefetch-buffer 40 --cloud-index-prefetch-buffer -1 --disable-bam-index-caching false --sites-only-vcf-output false --help false --version false --showHidden false --verbosity INFO --QUIET false --use-jdk-deflater false --use-jdk-inflater false --gcs-max-retries 20 --gcs-project-for-requester-pays  --disable-tool-default-read-filters false --max-read-length 2147483647 --min-read-length 30 --minimum-mapping-quality 20 --disable-tool-default-annotations false --enable-all-annotations false",Version="4.6.1.0",Date="January 17, 2025, 10:51:47?PM IST">
+##INFO=<ID=AS_FilterStatus,Number=A,Type=String,Description="Filter status for each allele, as assessed by ApplyVQSR. Note that the VCF filter field will reflect the most lenient/sensitive status across all alleles.">
+##INFO=<ID=AS_SB_TABLE,Number=1,Type=String,Description="Allele-specific forward/reverse read counts for strand bias tests. Includes the reference and alleles separated by |.">
+##INFO=<ID=AS_UNIQ_ALT_READ_COUNT,Number=A,Type=Integer,Description="Number of reads with unique start and mate end positions for each alt at a variant site">
+##INFO=<ID=CONTQ,Number=1,Type=Float,Description="Phred-scaled qualities that alt allele are not due to contamination">
+##INFO=<ID=DP,Number=1,Type=Integer,Description="Approximate read depth; some reads may have been filtered">
+##INFO=<ID=ECNT,Number=1,Type=Integer,Description="Number of potential somatic events in the assembly region">
+##INFO=<ID=ECNTH,Number=A,Type=Integer,Description="Number of somatic events in best supporting haplotype for each alt allele">
+##INFO=<ID=GERMQ,Number=1,Type=Integer,Description="Phred-scaled quality that alt alleles are not germline variants">
+##INFO=<ID=MBQ,Number=R,Type=Integer,Description="median base quality by allele">
+##INFO=<ID=MFRL,Number=R,Type=Integer,Description="median fragment length by allele">
+##INFO=<ID=MMQ,Number=R,Type=Integer,Description="median mapping quality by allele">
+##INFO=<ID=MPOS,Number=A,Type=Integer,Description="median distance from end of read">
+##INFO=<ID=NALOD,Number=A,Type=Float,Description="Log 10 odds of artifact in normal with same allele fraction as tumor">
+##INFO=<ID=NCount,Number=1,Type=Integer,Description="Count of N bases in the pileup">
+##INFO=<ID=NLOD,Number=A,Type=Float,Description="Normal log 10 likelihood ratio of diploid het or hom alt genotypes">
+##INFO=<ID=OCM,Number=1,Type=Integer,Description="Number of alt reads whose original alignment doesn't match the current contig.">
+##INFO=<ID=PON,Number=0,Type=Flag,Description="site found in panel of normals">
+##INFO=<ID=POPAF,Number=A,Type=Float,Description="negative log 10 population allele frequencies of alt alleles">
+##INFO=<ID=ROQ,Number=1,Type=Float,Description="Phred-scaled qualities that alt allele are not due to read orientation artifact">
+##INFO=<ID=RPA,Number=R,Type=Integer,Description="Number of times tandem repeat unit is repeated, for each allele (including reference)">
+##INFO=<ID=RU,Number=1,Type=String,Description="Tandem repeat unit (bases)">
+##INFO=<ID=SEQQ,Number=1,Type=Integer,Description="Phred-scaled quality that alt alleles are not sequencing errors">
+##INFO=<ID=STR,Number=0,Type=Flag,Description="Variant is a short tandem repeat">
+##INFO=<ID=STRANDQ,Number=1,Type=Integer,Description="Phred-scaled quality of strand bias artifact">
+##INFO=<ID=STRQ,Number=1,Type=Integer,Description="Phred-scaled quality that alt alleles in STRs are not polymerase slippage errors">
+##INFO=<ID=TLOD,Number=A,Type=Float,Description="Log 10 likelihood ratio score of variant existing versus not existing">
+##MutectVersion=2.2
+##contig=<ID=NC_000001.11,length=248956422>
+##contig=<ID=NT_187361.1,length=175055>
+##contig=<ID=NT_187362.1,length=32032>
+##contig=<ID=NT_187363.1,length=127682>
+##contig=<ID=NT_187364.1,length=66860>
+##contig=<ID=NT_187365.1,length=40176>
+##contig=<ID=NT_187366.1,length=42210>
+##contig=<ID=NT_187367.1,length=176043>
+##contig=<ID=NT_187368.1,length=40745>
+##contig=<ID=NT_187369.1,length=41717>
+##contig=<ID=NC_000002.12,length=242193529>
+##contig=<ID=NT_187370.1,length=161471>
+##contig=<ID=NT_187371.1,length=153799>
+##contig=<ID=NC_000003.12,length=198295559>
+##contig=<ID=NT_167215.1,length=155397>
+##contig=<ID=NC_000004.12,length=190214555>
+##contig=<ID=NT_113793.3,length=209709>
+##contig=<ID=NC_000005.10,length=181538259>
+##contig=<ID=NT_113948.1,length=92689>
+##contig=<ID=NC_000006.12,length=170805979>
+##contig=<ID=NC_000007.14,length=159345973>
+##contig=<ID=NC_000008.11,length=145138636>
+##contig=<ID=NC_000009.12,length=138394717>
+##contig=<ID=NT_187372.1,length=40062>
+##contig=<ID=NT_187373.1,length=38054>
+##contig=<ID=NT_187374.1,length=176845>
+##contig=<ID=NT_187375.1,length=39050>
+##contig=<ID=NC_000010.11,length=133797422>
+##contig=<ID=NC_000011.10,length=135086622>
+##contig=<ID=NC_000012.12,length=133275309>
+##contig=<ID=NC_000013.11,length=114364328>
+##contig=<ID=NC_000014.9,length=107043718>
+##contig=<ID=NT_113796.3,length=201709>
+##contig=<ID=NT_167219.1,length=211173>
+##contig=<ID=NT_187377.1,length=194050>
+##contig=<ID=NT_113888.1,length=191469>
+##contig=<ID=NT_187378.1,length=38115>
+##contig=<ID=NT_187379.1,length=39555>
+##contig=<ID=NT_187380.1,length=172810>
+##contig=<ID=NT_187381.1,length=43739>
+##contig=<ID=NC_000015.10,length=101991189>
+##contig=<ID=NT_187382.1,length=448248>
+##contig=<ID=NC_000016.10,length=90338345>
+##contig=<ID=NT_187383.1,length=1872759>
+##contig=<ID=NC_000017.11,length=83257441>
+##contig=<ID=NT_113930.2,length=185591>
+##contig=<ID=NT_187384.1,length=280839>
+##contig=<ID=NT_187385.1,length=112551>
+##contig=<ID=NC_000018.10,length=80373285>
+##contig=<ID=NC_000019.10,length=58617616>
+##contig=<ID=NC_000020.11,length=64444167>
+##contig=<ID=NC_000021.9,length=46709983>
+##contig=<ID=NC_000022.11,length=50818468>
+##contig=<ID=NT_187386.1,length=150754>
+##contig=<ID=NT_187387.1,length=41543>
+##contig=<ID=NT_187388.1,length=179772>
+##contig=<ID=NT_187390.1,length=42811>
+##contig=<ID=NT_187391.1,length=181920>
+##contig=<ID=NT_187392.1,length=103838>
+##contig=<ID=NT_187393.1,length=99375>
+##contig=<ID=NT_187394.1,length=73985>
+##contig=<ID=NC_000023.11,length=156040895>
+##contig=<ID=NC_000024.10,length=57227415>
+##contig=<ID=NT_187395.1,length=37240>
+##contig=<ID=NT_187396.1,length=2274>
+##contig=<ID=NT_187397.1,length=2165>
+##contig=<ID=NT_187398.1,length=1942>
+##contig=<ID=NT_187399.1,length=1472>
+##contig=<ID=NT_187400.1,length=21476>
+##contig=<ID=NT_187401.1,length=4416>
+##contig=<ID=NT_187402.1,length=1201>
+##contig=<ID=NT_187403.1,length=1444>
+##contig=<ID=NT_187404.1,length=2276>
+##contig=<ID=NT_187405.1,length=998>
+##contig=<ID=NT_187406.1,length=12399>
+##contig=<ID=NT_187407.1,length=37690>
+##contig=<ID=NT_187408.1,length=1179>
+##contig=<ID=NT_187409.1,length=2646>
+##contig=<ID=NT_187410.1,length=2489>
+##contig=<ID=NT_187411.1,length=1029>
+##contig=<ID=NT_187412.1,length=2145>
+##contig=<ID=NT_187413.1,length=2321>
+##contig=<ID=NT_187414.1,length=2140>
+##contig=<ID=NT_187415.1,length=2043>
+##contig=<ID=NT_187416.1,length=1445>
+##contig=<ID=NT_187417.1,length=981>
+##contig=<ID=NT_187418.1,length=1884>
+##contig=<ID=NT_187419.1,length=1361>
+##contig=<ID=NT_187420.1,length=392061>
+##contig=<ID=NT_187421.1,length=1233>
+##contig=<ID=NT_187422.1,length=1774>
+##contig=<ID=NT_187423.1,length=3920>
+##contig=<ID=NT_187424.1,length=92983>
+##contig=<ID=NT_187425.1,length=112505>
+##contig=<ID=NT_187426.1,length=4055>
+##contig=<ID=NT_187427.1,length=2415>
+##contig=<ID=NT_187428.1,length=2318>
+##contig=<ID=NT_187429.1,length=2186>
+##contig=<ID=NT_187430.1,length=1951>
+##contig=<ID=NT_187431.1,length=1300>
+##contig=<ID=NT_187432.1,length=22689>
+##contig=<ID=NT_187433.1,length=138126>
+##contig=<ID=NT_187434.1,length=5674>
+##contig=<ID=NT_187435.1,length=8127>
+##contig=<ID=NT_187436.1,length=6361>
+##contig=<ID=NT_187437.1,length=5353>
+##contig=<ID=NT_187438.1,length=3253>
+##contig=<ID=NT_187439.1,length=1899>
+##contig=<ID=NT_187440.1,length=2983>
+##contig=<ID=NT_187441.1,length=2168>
+##contig=<ID=NT_187442.1,length=993>
+##contig=<ID=NT_187443.1,length=91309>
+##contig=<ID=NT_187444.1,length=1202>
+##contig=<ID=NT_187445.1,length=1599>
+##contig=<ID=NT_187446.1,length=1400>
+##contig=<ID=NT_187447.1,length=2969>
+##contig=<ID=NT_187448.1,length=1553>
+##contig=<ID=NT_187449.1,length=7046>
+##contig=<ID=NT_187450.1,length=31033>
+##contig=<ID=NT_187451.1,length=44474>
+##contig=<ID=NT_187452.1,length=4685>
+##contig=<ID=NT_187453.1,length=4513>
+##contig=<ID=NT_187454.1,length=6504>
+##contig=<ID=NT_187455.1,length=6158>
+##contig=<ID=NT_187456.1,length=3041>
+##contig=<ID=NT_187457.1,length=5796>
+##contig=<ID=NT_187458.1,length=1652>
+##contig=<ID=NT_187459.1,length=1040>
+##contig=<ID=NT_187460.1,length=1368>
+##contig=<ID=NT_187461.1,length=2699>
+##contig=<ID=NT_187462.1,length=1048>
+##contig=<ID=NT_187463.1,length=1428>
+##contig=<ID=NT_187464.1,length=1428>
+##contig=<ID=NT_187465.1,length=1026>
+##contig=<ID=NT_187466.1,length=1121>
+##contig=<ID=NT_187467.1,length=1803>
+##contig=<ID=NT_187468.1,length=2855>
+##contig=<ID=NT_187469.1,length=3530>
+##contig=<ID=NT_187470.1,length=8320>
+##contig=<ID=NT_187471.1,length=1048>
+##contig=<ID=NT_187472.1,length=1045>
+##contig=<ID=NT_187473.1,length=1298>
+##contig=<ID=NT_187474.1,length=2387>
+##contig=<ID=NT_187475.1,length=1537>
+##contig=<ID=NT_187476.1,length=1143>
+##contig=<ID=NT_187477.1,length=1880>
+##contig=<ID=NT_187478.1,length=1216>
+##contig=<ID=NT_187479.1,length=970>
+##contig=<ID=NT_187480.1,length=1788>
+##contig=<ID=NT_187481.1,length=1484>
+##contig=<ID=NT_187482.1,length=1750>
+##contig=<ID=NT_187483.1,length=1308>
+##contig=<ID=NT_187484.1,length=1658>
+##contig=<ID=NT_187485.1,length=971>
+##contig=<ID=NT_187486.1,length=1930>
+##contig=<ID=NT_187487.1,length=990>
+##contig=<ID=NT_187488.1,length=4215>
+##contig=<ID=NT_187489.1,length=1136>
+##contig=<ID=NT_187490.1,length=2656>
+##contig=<ID=NT_187491.1,length=1650>
+##contig=<ID=NT_187492.1,length=1451>
+##contig=<ID=NT_187493.1,length=2378>
+##contig=<ID=NT_187494.1,length=2805>
+##contig=<ID=NT_187495.1,length=7992>
+##contig=<ID=NT_187496.1,length=7642>
+##contig=<ID=NT_113901.1,length=182896>
+##contig=<ID=NT_167213.1,length=179198>
+##contig=<ID=NT_167214.1,length=161802>
+##contig=<ID=NT_167218.1,length=179693>
+##contig=<ID=NT_187497.1,length=157432>
+##contig=<ID=NT_167220.1,length=15008>
+##contig=<ID=NT_167208.1,length=164239>
+##contig=<ID=NT_187498.1,length=210658>
+##contig=<ID=NT_187499.1,length=168472>
+##contig=<ID=NT_187500.1,length=41891>
+##contig=<ID=NT_187501.1,length=66486>
+##contig=<ID=NT_187502.1,length=198735>
+##contig=<ID=NT_187503.1,length=93321>
+##contig=<ID=NT_187504.1,length=158759>
+##contig=<ID=NT_187505.1,length=148850>
+##contig=<ID=NT_187506.1,length=150742>
+##contig=<ID=NT_187508.1,length=62944>
+##contig=<ID=NT_187509.1,length=40191>
+##contig=<ID=NT_187510.1,length=36723>
+##contig=<ID=NT_187511.1,length=79590>
+##contig=<ID=NT_187512.1,length=71251>
+##contig=<ID=NT_167209.1,length=137718>
+##contig=<ID=NT_187513.1,length=186739>
+##contig=<ID=NT_167211.2,length=176608>
+##contig=<ID=NT_113889.1,length=161147>
+##contig=<ID=NW_012132914.1,length=467143>
+##contig=<ID=NW_015495298.1,length=278659>
+##contig=<ID=NW_025791756.1,length=1572686>
+##contig=<ID=NW_011332688.1,length=305542>
+##contig=<ID=NW_014040926.1,length=349938>
+##contig=<ID=NW_009646195.1,length=166200>
+##contig=<ID=NW_018654706.1,length=166136>
+##contig=<ID=NW_019805487.1,length=44955>
+##contig=<ID=NW_009646194.1,length=186494>
+##contig=<ID=NW_018654707.1,length=140355>
+##contig=<ID=NW_014040925.1,length=141019>
+##contig=<ID=NW_017852928.1,length=551020>
+##contig=<ID=NW_009646196.1,length=122022>
+##contig=<ID=NW_025791753.1,length=516764>
+##contig=<ID=NW_025791758.1,length=211934>
+##contig=<ID=NW_025791759.1,length=250447>
+##contig=<ID=NW_025791754.1,length=847441>
+##contig=<ID=NW_011332687.1,length=460100>
+##contig=<ID=NW_018654708.1,length=330031>
+##contig=<ID=NW_014040927.1,length=212205>
+##contig=<ID=NW_025791757.1,length=210426>
+##contig=<ID=NW_025791755.1,length=335159>
+##contig=<ID=NW_021159988.1,length=84043>
+##contig=<ID=NW_025791767.1,length=244725>
+##contig=<ID=NW_025791768.1,length=174385>
+##contig=<ID=NW_025791766.1,length=489404>
+##contig=<ID=NW_025791763.1,length=284971>
+##contig=<ID=NW_012132915.1,length=481245>
+##contig=<ID=NW_025791760.1,length=431782>
+##contig=<ID=NW_025791765.1,length=955087>
+##contig=<ID=NW_018654709.1,length=181658>
+##contig=<ID=NW_025791762.1,length=500581>
+##contig=<ID=NW_025791761.1,length=535251>
+##contig=<ID=NW_025791764.1,length=120381>
+##contig=<ID=NW_015495299.1,length=535088>
+##contig=<ID=NW_018654710.1,length=140361>
+##contig=<ID=NW_011332690.1,length=365499>
+##contig=<ID=NW_021159987.1,length=145975>
+##contig=<ID=NW_011332689.1,length=208149>
+##contig=<ID=NW_017363813.1,length=411654>
+##contig=<ID=NW_025791770.1,length=301310>
+##contig=<ID=NW_025791771.1,length=475876>
+##contig=<ID=NW_009646197.1,length=451168>
+##contig=<ID=NW_012132916.1,length=373699>
+##contig=<ID=NW_011332691.1,length=415308>
+##contig=<ID=NW_021159989.1,length=215443>
+##contig=<ID=NW_018654711.1,length=175849>
+##contig=<ID=NW_012132917.1,length=165718>
+##contig=<ID=NW_009646198.1,length=305979>
+##contig=<ID=NW_019805491.1,length=105527>
+##contig=<ID=NW_019805492.1,length=195063>
+##contig=<ID=NW_019805490.1,length=302885>
+##contig=<ID=NW_019805489.1,length=197752>
+##contig=<ID=NW_019805488.1,length=164041>
+##contig=<ID=NW_025791769.1,length=469342>
+##contig=<ID=NW_021159990.1,length=235734>
+##contig=<ID=NW_021159993.1,length=176674>
+##contig=<ID=NW_013171799.1,length=90922>
+##contig=<ID=NW_025791774.1,length=205691>
+##contig=<ID=NW_021159992.1,length=53476>
+##contig=<ID=NW_021159994.1,length=125549>
+##contig=<ID=NW_021159991.1,length=341066>
+##contig=<ID=NW_021159995.1,length=276109>
+##contig=<ID=NW_013171800.1,length=163749>
+##contig=<ID=NW_013171801.1,length=236512>
+##contig=<ID=NW_025791772.1,length=308682>
+##contig=<ID=NW_017363814.1,length=420675>
+##contig=<ID=NW_025791773.1,length=113364>
+##contig=<ID=NW_015495301.1,length=205407>
+##contig=<ID=NW_015495300.1,length=230434>
+##contig=<ID=NW_025791777.1,length=2101585>
+##contig=<ID=NW_018654712.1,length=135987>
+##contig=<ID=NW_025791776.1,length=208405>
+##contig=<ID=NW_009646199.1,length=139087>
+##contig=<ID=NW_016107297.1,length=362221>
+##contig=<ID=NW_025791779.1,length=302485>
+##contig=<ID=NW_021159996.1,length=89956>
+##contig=<ID=NW_025791778.1,length=508332>
+##contig=<ID=NW_016107298.1,length=673059>
+##contig=<ID=NW_025791775.1,length=34400>
+##contig=<ID=NW_018654713.1,length=242796>
+##contig=<ID=NW_013171803.1,length=82315>
+##contig=<ID=NW_025791780.1,length=383128>
+##contig=<ID=NW_012132918.1,length=320750>
+##contig=<ID=NW_009646200.1,length=268330>
+##contig=<ID=NW_013171802.1,length=245716>
+##contig=<ID=NW_017363815.1,length=139427>
+##contig=<ID=NW_021159997.1,length=73265>
+##contig=<ID=NW_021159998.1,length=254759>
+##contig=<ID=NW_019805493.1,length=172555>
+##contig=<ID=NW_025791781.1,length=464417>
+##contig=<ID=NW_017852929.1,length=142129>
+##contig=<ID=NW_017852930.1,length=468267>
+##contig=<ID=NW_018654714.1,length=589656>
+##contig=<ID=NW_018654715.1,length=680662>
+##contig=<ID=NW_012132919.1,length=179932>
+##contig=<ID=NW_025791785.1,length=429744>
+##contig=<ID=NW_018654717.1,length=6367528>
+##contig=<ID=NW_017852932.1,length=265876>
+##contig=<ID=NW_025791782.1,length=150302>
+##contig=<ID=NW_017852931.1,length=156998>
+##contig=<ID=NW_025791784.1,length=106905>
+##contig=<ID=NW_019805494.1,length=103072>
+##contig=<ID=NW_025791786.1,length=207371>
+##contig=<ID=NW_018654716.1,length=165120>
+##contig=<ID=NW_025791783.1,length=39290>
+##contig=<ID=NW_013171804.1,length=163882>
+##contig=<ID=NW_013171805.1,length=134099>
+##contig=<ID=NW_025791789.1,length=569668>
+##contig=<ID=NW_025791787.1,length=340717>
+##contig=<ID=NW_025791788.1,length=482250>
+##contig=<ID=NW_009646201.1,length=330164>
+##contig=<ID=NW_021159999.1,length=25408>
+##contig=<ID=NW_021160000.1,length=454963>
+##contig=<ID=NW_011332694.1,length=420164>
+##contig=<ID=NW_021160001.1,length=292944>
+##contig=<ID=NW_013171806.1,length=185507>
+##contig=<ID=NW_009646202.1,length=277797>
+##contig=<ID=NW_013171807.1,length=264545>
+##contig=<ID=NW_025791790.1,length=196262>
+##contig=<ID=NW_011332693.1,length=85284>
+##contig=<ID=NW_011332692.1,length=14347>
+##contig=<ID=NW_015148966.2,length=204999>
+##contig=<ID=NW_025791792.1,length=434831>
+##contig=<ID=NW_021160004.1,length=270122>
+##contig=<ID=NW_025791794.1,length=122722>
+##contig=<ID=NW_011332695.1,length=203552>
+##contig=<ID=NW_021160006.1,length=170928>
+##contig=<ID=NW_019805496.1,length=279644>
+##contig=<ID=NW_019805495.1,length=305244>
+##contig=<ID=NW_017363816.1,length=140877>
+##contig=<ID=NW_025791793.1,length=344606>
+##contig=<ID=NW_019805498.1,length=181167>
+##contig=<ID=NW_021160005.1,length=217075>
+##contig=<ID=NW_021160003.1,length=165419>
+##contig=<ID=NW_019805497.1,length=301637>
+##contig=<ID=NW_013171808.1,length=181958>
+##contig=<ID=NW_021160002.1,length=45257>
+##contig=<ID=NW_025791791.1,length=261194>
+##contig=<ID=NW_009646203.1,length=108875>
+##contig=<ID=NW_013171809.1,length=109323>
+##contig=<ID=NW_018654718.1,length=1046838>
+##contig=<ID=NW_021160008.1,length=192531>
+##contig=<ID=NW_011332696.1,length=541038>
+##contig=<ID=NW_009646204.1,length=211377>
+##contig=<ID=NW_025791795.1,length=104537>
+##contig=<ID=NW_018654720.1,length=174808>
+##contig=<ID=NW_015148967.1,length=315610>
+##contig=<ID=NW_018654719.1,length=64689>
+##contig=<ID=NW_011332697.1,length=86533>
+##contig=<ID=NW_019805499.1,length=154139>
+##contig=<ID=NW_021160007.1,length=297568>
+##contig=<ID=NW_021160012.1,length=409912>
+##contig=<ID=NW_011332699.1,length=356766>
+##contig=<ID=NW_013171810.1,length=168146>
+##contig=<ID=NW_021160009.1,length=7309>
+##contig=<ID=NW_009646205.1,length=35455>
+##contig=<ID=NW_011332700.1,length=148762>
+##contig=<ID=NW_013171811.1,length=123480>
+##contig=<ID=NW_021160010.1,length=158944>
+##contig=<ID=NW_021160011.1,length=65394>
+##contig=<ID=NW_011332698.1,length=206320>
+##contig=<ID=NW_021160013.1,length=399183>
+##contig=<ID=NW_025791796.1,length=722645>
+##contig=<ID=NW_018654722.1,length=690932>
+##contig=<ID=NW_021160014.1,length=264228>
+##contig=<ID=NW_018654721.1,length=171798>
+##contig=<ID=NW_011332701.1,length=4998962>
+##contig=<ID=NW_021160018.1,length=396515>
+##contig=<ID=NW_021160017.1,length=5500449>
+##contig=<ID=NW_012132920.1,length=2365364>
+##contig=<ID=NW_025791798.1,length=204007>
+##contig=<ID=NW_021160016.1,length=369264>
+##contig=<ID=NW_025791797.1,length=1154574>
+##contig=<ID=NW_021160015.1,length=97763>
+##contig=<ID=NW_025791799.1,length=87715>
+##contig=<ID=NW_013171812.1,length=59016>
+##contig=<ID=NW_019805500.1,length=480415>
+##contig=<ID=NW_017852933.1,length=1927115>
+##contig=<ID=NW_021160019.1,length=270967>
+##contig=<ID=NW_013171813.1,length=267463>
+##contig=<ID=NW_018654723.1,length=78609>
+##contig=<ID=NW_012132921.1,length=169136>
+##contig=<ID=NW_025791800.1,length=334997>
+##contig=<ID=NW_017363817.1,length=281919>
+##contig=<ID=NW_021160020.1,length=137908>
+##contig=<ID=NW_016107299.1,length=154723>
+##contig=<ID=NW_017363819.1,length=276292>
+##contig=<ID=NW_025791803.1,length=538541>
+##contig=<ID=NW_025791801.1,length=372839>
+##contig=<ID=NW_017363818.1,length=246895>
+##contig=<ID=NW_019805501.1,length=116753>
+##contig=<ID=NW_025791806.1,length=172609>
+##contig=<ID=NW_025791802.1,length=234878>
+##contig=<ID=NW_025791805.1,length=187626>
+##contig=<ID=NW_021160021.1,length=56695>
+##contig=<ID=NW_025791804.1,length=144689>
+##contig=<ID=NW_019805503.1,length=163186>
+##contig=<ID=NW_014040928.1,length=205101>
+##contig=<ID=NW_019805502.1,length=230843>
+##contig=<ID=NW_013171814.1,length=407387>
+##contig=<ID=NW_018654724.1,length=93070>
+##contig=<ID=NW_025791809.1,length=226166>
+##contig=<ID=NW_025791810.1,length=89211>
+##contig=<ID=NW_025791807.1,length=333754>
+##contig=<ID=NW_021160022.1,length=493165>
+##contig=<ID=NW_014040929.1,length=405389>
+##contig=<ID=NW_025791808.1,length=137818>
+##contig=<ID=NW_009646206.1,length=370917>
+##contig=<ID=NW_016107300.1,length=163926>
+##contig=<ID=NW_016107301.1,length=170206>
+##contig=<ID=NW_016107302.1,length=168131>
+##contig=<ID=NW_016107303.1,length=293522>
+##contig=<ID=NW_016107304.1,length=241058>
+##contig=<ID=NW_016107305.1,length=159285>
+##contig=<ID=NW_016107306.1,length=178197>
+##contig=<ID=NW_016107307.1,length=166713>
+##contig=<ID=NW_016107308.1,length=99845>
+##contig=<ID=NW_016107309.1,length=161095>
+##contig=<ID=NW_016107310.1,length=223118>
+##contig=<ID=NW_016107311.1,length=100553>
+##contig=<ID=NW_016107313.1,length=171263>
+##contig=<ID=NW_016107314.1,length=145691>
+##contig=<ID=NW_016107312.1,length=156965>
+##contig=<ID=NW_025791811.1,length=273725>
+##contig=<ID=NW_025791812.1,length=355731>
+##contig=<ID=NW_021160023.1,length=519485>
+##contig=<ID=NW_025791813.1,length=336752>
+##contig=<ID=NW_025791814.1,length=1020778>
+##contig=<ID=NW_025791815.1,length=189707>
+##contig=<ID=NW_021160026.1,length=412368>
+##contig=<ID=NW_021160024.1,length=461303>
+##contig=<ID=NW_009646207.1,length=156562>
+##contig=<ID=NW_014040930.1,length=155930>
+##contig=<ID=NW_014040931.1,length=174749>
+##contig=<ID=NW_009646208.1,length=153027>
+##contig=<ID=NW_015148968.1,length=145162>
+##contig=<ID=NW_021160025.1,length=12295>
+##contig=<ID=NW_015148969.2,length=101040>
+##contig=<ID=NW_017363820.1,length=188004>
+##contig=<ID=NW_021160031.1,length=17435>
+##contig=<ID=NW_025791820.1,length=330493>
+##contig=<ID=NW_021160028.1,length=28824>
+##contig=<ID=NW_025791816.1,length=68810>
+##contig=<ID=NW_021160029.1,length=68192>
+##contig=<ID=NW_025791817.1,length=140567>
+##contig=<ID=NW_021160027.1,length=403128>
+##contig=<ID=NW_025791819.1,length=294119>
+##contig=<ID=NW_021160030.1,length=14678>
+##contig=<ID=NW_025791818.1,length=619716>
+##contig=<ID=NW_018654725.1,length=48370>
+##contig=<ID=NW_025791821.1,length=865743>
+##contig=<ID=NW_018654726.1,length=209722>
+##contig=<ID=NW_009646209.1,length=101150>
+##contig=<ID=NT_187515.1,length=354444>
+##contig=<ID=NT_187517.1,length=256271>
+##contig=<ID=NT_187514.1,length=109528>
+##contig=<ID=NT_187520.1,length=185285>
+##contig=<ID=NW_003315905.1,length=182439>
+##contig=<ID=NW_003315906.1,length=110268>
+##contig=<ID=NW_003315907.2,length=366580>
+##contig=<ID=NT_187521.1,length=50258>
+##contig=<ID=NT_187519.1,length=911658>
+##contig=<ID=NT_187516.1,length=425601>
+##contig=<ID=NT_187518.1,length=165834>
+##contig=<ID=NT_187525.1,length=136240>
+##contig=<ID=NT_187526.1,length=70887>
+##contig=<ID=NT_187529.1,length=223625>
+##contig=<ID=NT_187522.1,length=120616>
+##contig=<ID=NW_003315908.1,length=143390>
+##contig=<ID=NT_187524.1,length=133041>
+##contig=<ID=NT_187531.1,length=138019>
+##contig=<ID=NT_187530.1,length=110395>
+##contig=<ID=NT_187528.1,length=110099>
+##contig=<ID=NW_003571033.2,length=96131>
+##contig=<ID=NW_003315909.1,length=123821>
+##contig=<ID=NT_187527.1,length=174166>
+##contig=<ID=NT_187523.1,length=161578>
+##contig=<ID=NW_003871060.2,length=173151>
+##contig=<ID=NT_187535.1,length=109187>
+##contig=<ID=NT_187537.1,length=224108>
+##contig=<ID=NW_003315913.1,length=180671>
+##contig=<ID=NT_187533.1,length=173649>
+##contig=<ID=NT_187536.1,length=248252>
+##contig=<ID=NT_187538.1,length=113034>
+##contig=<ID=NT_187532.1,length=205312>
+##contig=<ID=NT_187534.1,length=162429>
+##contig=<ID=NT_187539.1,length=184404>
+##contig=<ID=NT_187540.1,length=220246>
+##contig=<ID=NW_003315915.1,length=376187>
+##contig=<ID=NT_187541.1,length=111943>
+##contig=<ID=NT_167250.2,length=586476>
+##contig=<ID=NT_187544.1,length=158965>
+##contig=<ID=NW_003315914.1,length=164536>
+##contig=<ID=NT_187542.1,length=119912>
+##contig=<ID=NT_187545.1,length=205944>
+##contig=<ID=NT_187543.1,length=244096>
+##contig=<ID=NT_187550.1,length=126136>
+##contig=<ID=NT_187548.1,length=179043>
+##contig=<ID=NT_187547.1,length=195710>
+##contig=<ID=NW_003315920.1,length=82728>
+##contig=<ID=NW_003571036.1,length=226852>
+##contig=<ID=NT_187551.1,length=164558>
+##contig=<ID=NW_003315917.2,length=1612928>
+##contig=<ID=NW_003315918.1,length=101241>
+##contig=<ID=NT_187549.1,length=172708>
+##contig=<ID=NW_003315919.1,length=173459>
+##contig=<ID=NT_187546.1,length=131892>
+##contig=<ID=NT_167244.2,length=4672374>
+##contig=<ID=NT_187555.1,length=175808>
+##contig=<ID=NT_187554.1,length=152148>
+##contig=<ID=NW_003315921.1,length=124736>
+##contig=<ID=NT_187556.1,length=870480>
+##contig=<ID=NT_187557.1,length=75005>
+##contig=<ID=NW_004166862.2,length=185823>
+##contig=<ID=NT_187552.1,length=197536>
+##contig=<ID=NT_187553.1,length=271782>
+##contig=<ID=NT_187558.1,length=157952>
+##contig=<ID=NT_187561.1,length=209586>
+##contig=<ID=NT_187559.1,length=158166>
+##contig=<ID=NW_003315922.2,length=119183>
+##contig=<ID=NT_187562.1,length=1111570>
+##contig=<ID=NT_187564.1,length=271455>
+##contig=<ID=NT_187563.1,length=126434>
+##contig=<ID=NT_187560.1,length=209988>
+##contig=<ID=NT_187572.1,length=145606>
+##contig=<ID=NT_187568.1,length=282736>
+##contig=<ID=NT_187565.1,length=292436>
+##contig=<ID=NT_187576.1,length=985506>
+##contig=<ID=NT_187570.1,length=300230>
+##contig=<ID=NT_187577.1,length=624492>
+##contig=<ID=NT_187566.1,length=141812>
+##contig=<ID=NT_187567.1,length=374415>
+##contig=<ID=NT_187574.1,length=133535>
+##contig=<ID=NT_187575.1,length=36640>
+##contig=<ID=NT_187573.1,length=158983>
+##contig=<ID=NT_187571.1,length=305841>
+##contig=<ID=NT_187569.1,length=132244>
+##contig=<ID=NW_003315928.1,length=162988>
+##contig=<ID=NW_003315929.1,length=71551>
+##contig=<ID=NW_003315930.1,length=171286>
+##contig=<ID=NW_003315931.1,length=60032>
+##contig=<ID=NT_187578.1,length=439082>
+##contig=<ID=NW_003315934.1,length=179254>
+##contig=<ID=NT_187579.1,length=181496>
+##contig=<ID=NW_003315935.1,length=309802>
+##contig=<ID=NT_187586.1,length=210133>
+##contig=<ID=NT_187584.1,length=177092>
+##contig=<ID=NT_187585.1,length=296895>
+##contig=<ID=NT_187583.1,length=204059>
+##contig=<ID=NW_003315936.1,length=154407>
+##contig=<ID=NW_003871073.1,length=200998>
+##contig=<ID=NW_003871074.1,length=191409>
+##contig=<ID=NT_187582.1,length=67707>
+##contig=<ID=NT_187581.1,length=186169>
+##contig=<ID=NW_003571049.1,length=167313>
+##contig=<ID=NW_003571050.1,length=408271>
+##contig=<ID=NT_187588.1,length=40090>
+##contig=<ID=NW_003315938.1,length=120804>
+##contig=<ID=NT_187587.1,length=238139>
+##contig=<ID=NW_003315939.2,length=169178>
+##contig=<ID=NW_003315941.1,length=138655>
+##contig=<ID=NW_003315942.2,length=152874>
+##contig=<ID=NT_187590.1,length=119498>
+##contig=<ID=NW_003315940.1,length=184319>
+##contig=<ID=NT_187589.1,length=76061>
+##contig=<ID=NT_187591.1,length=56134>
+##contig=<ID=NT_187594.1,length=191684>
+##contig=<ID=NT_187593.1,length=180306>
+##contig=<ID=NT_187597.1,length=103832>
+##contig=<ID=NT_187595.1,length=169134>
+##contig=<ID=NT_187592.1,length=306913>
+##contig=<ID=NT_187596.1,length=37287>
+##contig=<ID=NT_187598.1,length=322166>
+##contig=<ID=NT_187601.1,length=1511111>
+##contig=<ID=NT_187599.1,length=180703>
+##contig=<ID=NT_187600.1,length=1351393>
+##contig=<ID=NT_187602.1,length=478999>
+##contig=<ID=NT_187604.1,length=263054>
+##contig=<ID=NT_187603.1,length=327382>
+##contig=<ID=NW_003315943.1,length=296527>
+##contig=<ID=NT_187605.1,length=244917>
+##contig=<ID=NW_003315944.2,length=388773>
+##contig=<ID=NT_187606.1,length=430880>
+##contig=<ID=NT_187610.1,length=134193>
+##contig=<ID=NT_187609.1,length=63982>
+##contig=<ID=NT_187608.1,length=232857>
+##contig=<ID=NT_187607.1,length=2659700>
+##contig=<ID=NW_003315945.1,length=192462>
+##contig=<ID=NW_003315946.1,length=89672>
+##contig=<ID=NW_003315952.3,length=375691>
+##contig=<ID=NT_187613.1,length=391357>
+##contig=<ID=NT_187611.1,length=196688>
+##contig=<ID=NT_187614.1,length=2877074>
+##contig=<ID=NW_003871091.1,length=278131>
+##contig=<ID=NW_003871092.1,length=70345>
+##contig=<ID=NW_003315953.2,length=133151>
+##contig=<ID=NT_167251.2,length=1821992>
+##contig=<ID=NW_003315954.1,length=223995>
+##contig=<ID=NT_187615.1,length=235827>
+##contig=<ID=NT_187616.1,length=108763>
+##contig=<ID=NW_003315955.1,length=90219>
+##contig=<ID=NT_187612.1,length=178921>
+##contig=<ID=NT_187618.1,length=111737>
+##contig=<ID=NW_003315956.1,length=289831>
+##contig=<ID=NW_003315959.1,length=164789>
+##contig=<ID=NW_003315960.1,length=198278>
+##contig=<ID=NW_003315957.1,length=104552>
+##contig=<ID=NW_003315958.1,length=167950>
+##contig=<ID=NW_003315961.1,length=159547>
+##contig=<ID=NT_187617.1,length=167999>
+##contig=<ID=NT_187622.1,length=61734>
+##contig=<ID=NT_187621.1,length=52969>
+##contig=<ID=NW_003315962.1,length=385657>
+##contig=<ID=NW_003315964.2,length=170222>
+##contig=<ID=NW_003315965.1,length=188024>
+##contig=<ID=NW_003315963.1,length=155864>
+##contig=<ID=NT_187619.1,length=43156>
+##contig=<ID=NT_187620.1,length=233762>
+##contig=<ID=NW_003571054.1,length=987716>
+##contig=<ID=NW_003315966.2,length=128386>
+##contig=<ID=NT_187623.1,length=118774>
+##contig=<ID=NT_187625.1,length=58661>
+##contig=<ID=NT_187624.1,length=183433>
+##contig=<ID=NW_003315967.2,length=63917>
+##contig=<ID=NT_187628.1,length=166743>
+##contig=<ID=NT_187627.1,length=143900>
+##contig=<ID=NW_003315968.2,length=201197>
+##contig=<ID=NW_003315969.2,length=74653>
+##contig=<ID=NW_003315970.2,length=116689>
+##contig=<ID=NT_187626.1,length=82692>
+##contig=<ID=NT_187629.1,length=259914>
+##contig=<ID=NT_187632.1,length=186262>
+##contig=<ID=NT_187633.1,length=304135>
+##contig=<ID=NT_187630.1,length=263666>
+##contig=<ID=NT_187631.1,length=101331>
+##contig=<ID=NW_003315972.2,length=96924>
+##contig=<ID=NW_003315971.2,length=162811>
+##contig=<ID=NT_187634.1,length=284869>
+##contig=<ID=NT_187635.1,length=144206>
+##contig=<ID=NT_187646.1,length=162212>
+##contig=<ID=NT_187648.1,length=214158>
+##contig=<ID=NT_187647.1,length=161218>
+##contig=<ID=NT_187649.1,length=162896>
+##contig=<ID=NT_187650.1,length=378547>
+##contig=<ID=NT_187651.1,length=1144418>
+##contig=<ID=NT_187652.1,length=130957>
+##contig=<ID=NT_113891.3,length=4795265>
+##contig=<ID=NT_187653.1,length=190869>
+##contig=<ID=NT_187655.1,length=136959>
+##contig=<ID=NT_187654.1,length=318687>
+##contig=<ID=NT_187656.1,length=106711>
+##contig=<ID=NT_187657.1,length=214625>
+##contig=<ID=NT_187658.1,length=572349>
+##contig=<ID=NT_187659.1,length=196384>
+##contig=<ID=NT_187660.1,length=5161414>
+##contig=<ID=NT_187662.1,length=137721>
+##contig=<ID=NT_187664.1,length=157099>
+##contig=<ID=NT_187661.1,length=325800>
+##contig=<ID=NW_003871093.1,length=88070>
+##contig=<ID=NT_187663.1,length=1423190>
+##contig=<ID=NT_187665.1,length=174061>
+##contig=<ID=NT_187666.1,length=157710>
+##contig=<ID=NW_003571055.2,length=729520>
+##contig=<ID=NW_004504305.1,length=74013>
+##contig=<ID=NT_187667.1,length=274009>
+##contig=<ID=NT_187678.1,length=166540>
+##contig=<ID=NT_187679.1,length=555799>
+##contig=<ID=NT_167245.2,length=4604811>
+##contig=<ID=NT_187680.1,length=229282>
+##contig=<ID=NT_187681.1,length=218612>
+##contig=<ID=NW_003571056.2,length=1064304>
+##contig=<ID=NT_187682.1,length=176103>
+##contig=<ID=NT_187688.1,length=163458>
+##contig=<ID=NT_167246.2,length=4677643>
+##contig=<ID=NW_003571057.2,length=1091841>
+##contig=<ID=NT_187689.1,length=197351>
+##contig=<ID=NT_167247.2,length=4827813>
+##contig=<ID=NW_003571058.2,length=1066390>
+##contig=<ID=NT_187690.1,length=164170>
+##contig=<ID=NT_167248.2,length=4606388>
+##contig=<ID=NW_003571059.2,length=1002683>
+##contig=<ID=NT_187691.1,length=165607>
+##contig=<ID=NT_167249.2,length=4929269>
+##contig=<ID=NW_003571060.1,length=987100>
+##contig=<ID=NT_187692.1,length=76752>
+##contig=<ID=NW_003571061.2,length=796479>
+##contig=<ID=NT_187693.1,length=1066800>
+##contig=<ID=NT_187636.1,length=248807>
+##contig=<ID=NT_187637.1,length=170399>
+##contig=<ID=NT_187638.1,length=157053>
+##contig=<ID=NT_187639.1,length=171027>
+##contig=<ID=NT_187640.1,length=204239>
+##contig=<ID=NT_187641.1,length=209512>
+##contig=<ID=NT_187642.1,length=155532>
+##contig=<ID=NT_187643.1,length=170698>
+##contig=<ID=NT_187644.1,length=184499>
+##contig=<ID=NT_187645.1,length=170680>
+##contig=<ID=NT_187668.1,length=205194>
+##contig=<ID=NT_187669.1,length=170665>
+##contig=<ID=NT_187670.1,length=184516>
+##contig=<ID=NT_187671.1,length=190932>
+##contig=<ID=NT_187672.1,length=123111>
+##contig=<ID=NT_187673.1,length=170701>
+##contig=<ID=NT_187674.1,length=198005>
+##contig=<ID=NT_187675.1,length=282224>
+##contig=<ID=NT_187676.1,length=187935>
+##contig=<ID=NT_187677.1,length=189352>
+##contig=<ID=NT_187683.1,length=186203>
+##contig=<ID=NT_187684.1,length=200773>
+##contig=<ID=NT_187685.1,length=170148>
+##contig=<ID=NT_187686.1,length=215732>
+##contig=<ID=NT_187687.1,length=170537>
+##contig=<ID=NT_113949.2,length=177381>
+##contig=<ID=NC_012920.1,length=16569>
+##filtering_status=These calls have been filtered by FilterMutectCalls to label false positives with a list of failed filters and true positives with PASS.
+##normal_sample=PA221MH-lib09-P19-Norm_S1_L001
+##source=FilterMutectCalls
+##source=Mutect2
+##tumor_sample=PA220KH-lib09-P19-Tumor_S2_L001
+#CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	PA220KH-lib09-P19-Tumor_S2_L001	PA221MH-lib09-P19-Norm_S1_L001
+NC_000003.12	179203819	.	TA	T	.	haplotype;weak_evidence	AS_FilterStatus=weak_evidence;AS_SB_TABLE=31,29|1,2;DP=63;ECNT=2;ECNTH=1;GERMQ=60;MBQ=20,20;MFRL=151,149;MMQ=60,60;MPOS=19;NALOD=-1.230e+00;NLOD=4.82;POPAF=6.00;TLOD=4.61	GT:AD:AF:DP:F1R2:F2R1:FAD:PGT:PID:PS:SB	0|1:28,3:0.158:31:1,0:14,2:15,2:0|1:179203819_TA_T:179203819:15,13,1,2	0|0:32,0:0.056:32:1,0:15,0:16,0:0|1:179203819_TA_T:179203819:16,16,0,0
+NC_000003.12	179203820	.	AT	A	.	weak_evidence	AS_FilterStatus=weak_evidence;AS_SB_TABLE=30,29|2,2;DP=63;ECNT=2;ECNTH=1;GERMQ=51;MBQ=20,20;MFRL=150,153;MMQ=60,60;MPOS=19;NALOD=-9.542e-01;NLOD=4.82;POPAF=6.00;TLOD=5.11	GT:AD:AF:DP:F1R2:F2R1:FAD:PGT:PID:PS:SB	1|0:27,4:0.164:31:1,0:12,2:15,2:1|0:179203819_TA_T:179203819:14,13,2,2	0|0:32,0:0.056:32:1,0:15,0:16,0:1|0:179203819_TA_T:179203819:16,16,0,0
+NC_000006.12	43507679	.	C	T	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=15,33|1,2;DP=54;ECNT=1;ECNTH=1;GERMQ=93;MBQ=20,20;MFRL=214,270;MMQ=60,60;MPOS=17;NALOD=-1.230e+00;NLOD=4.81;POPAF=6.00;TLOD=5.34	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:23,3:0.144:26:0,0:7,1:17,2:6,17,1,2	0/0:25,0:0.056:25:2,0:9,0:16,0:9,16,0,0
+NC_000010.11	35633313	.	A	G	.	weak_evidence	AS_FilterStatus=weak_evidence;AS_SB_TABLE=7,15|1,1;DP=25;ECNT=1;ECNTH=1;GERMQ=50;MBQ=20,20;MFRL=200,164;MMQ=60,60;MPOS=69;NALOD=-9.542e-01;NLOD=2.41;POPAF=6.00;TLOD=3.04	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:10,2:0.200:12:2,0:5,1:7,1:3,7,1,1	0/0:12,0:0.100:12:2,0:4,0:8,0:4,8,0,0
+NC_000016.10	4694276	.	G	A	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=0,13|0,3;DP=16;ECNT=1;ECNTH=1;GERMQ=39;MBQ=37,37;MFRL=128,0;MMQ=60,60;MPOS=66;NALOD=-9.542e-01;NLOD=2.41;POPAF=6.00;TLOD=9.83	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:5,3:0.400:8:2,0:3,3:5,3:0,5,0,3	0/0:8,0:0.100:8:4,0:4,0:8,0:0,8,0,0
+NC_000017.11	7670627	.	C	T	.	weak_evidence	AS_FilterStatus=weak_evidence;AS_SB_TABLE=7,16|1,1;DP=25;ECNT=1;ECNTH=1;GERMQ=61;MBQ=37,20;MFRL=134,133;MMQ=60,60;MPOS=26;NALOD=-1.176e+00;NLOD=4.21;POPAF=6.00;TLOD=3.36	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:6,2:0.286:8:3,0:1,1:4,1:3,3,1,1	0/0:17,0:0.063:17:8,0:6,0:14,0:4,13,0,0
+NC_000017.11	7675088	.	C	T	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=48,27|3,2;DP=81;ECNT=1;ECNTH=1;GERMQ=93;MBQ=37,20;MFRL=182,166;MMQ=60,60;MPOS=42;NALOD=-1.531e+00;NLOD=9.93;POPAF=6.00;TLOD=8.85	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:35,5:0.117:40:14,3:15,0:29,3:21,14,3,2	0/0:40,0:0.029:40:16,0:17,0:33,0:27,13,0,0
+NC_000017.11	7675186	.	A	G	.	normal_artifact;panel_of_normals	AS_FilterStatus=SITE;AS_SB_TABLE=78,82|3,4;DP=177;ECNT=2;ECNTH=1;GERMQ=93;MBQ=20,20;MFRL=182,214;MMQ=60,60;MPOS=48;NALOD=4.25;NLOD=5.94;PON;POPAF=6.00;TLOD=4.96	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:80,4:0.058:84:20,1:27,1:47,2:37,43,2,2	0/0:80,3:0.057:83:16,1:31,1:48,2:41,39,1,2
+NC_000017.11	7675254	.	A	G	.	normal_artifact	AS_FilterStatus=SITE;AS_SB_TABLE=32,78|3,3;DP=116;ECNT=2;ECNTH=1;GERMQ=93;MBQ=20,20;MFRL=168,177;MMQ=60,60;MPOS=30;NALOD=1.32;NLOD=8.34;POPAF=6.00;TLOD=5.22	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:54,4:0.070:58:10,0:14,2:39,2:15,39,2,2	0/0:56,2:0.044:58:8,0:17,1:42,1:17,39,1,1
+NC_000018.10	51054859	.	C	G	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=56,61|2,2;DP=121;ECNT=1;ECNTH=1;GERMQ=93;MBQ=20,37;MFRL=147,149;MMQ=60,60;MPOS=61;NALOD=-1.643e+00;NLOD=12.94;POPAF=6.00;TLOD=11.39	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:47,4:0.111:51:20,3:11,0:31,3:20,27,2,2	0/0:70,0:0.022:70:28,0:15,0:43,0:36,34,0,0
+NC_000018.10	51054923	.	T	C	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=54,56|1,2;DP=113;ECNT=1;ECNTH=1;GERMQ=93;MBQ=20,20;MFRL=147,147;MMQ=60,60;MPOS=30;NALOD=-1.613e+00;NLOD=12.04;POPAF=6.00;TLOD=4.95	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:44,3:0.094:47:17,1:11,1:28,2:21,23,1,2	0/0:66,0:0.024:66:25,0:15,0:40,0:33,33,0,0
+NC_000018.10	51058112	.	C	G	.	PASS	AS_FilterStatus=SITE;AS_SB_TABLE=13,5|1,1;DP=25;ECNT=1;ECNTH=1;GERMQ=52;MBQ=37,37;MFRL=143,145;MMQ=60,60;MPOS=6;NALOD=-1.108e+00;NLOD=3.31;POPAF=6.00;TLOD=6.49	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:6,2:0.216:8:6,0:0,1:6,1:5,1,1,1	0/0:12,0:0.073:12:8,0:3,0:11,0:8,4,0,0
+NC_000019.10	15614428	.	GA	G,GAA	.	germline;multiallelic;normal_artifact;slippage;weak_evidence	AS_FilterStatus=weak_evidence|weak_evidence;AS_SB_TABLE=18,38|7,16|3,8;DP=98;ECNT=1;ECNTH=0,1;GERMQ=1;MBQ=20,20,20;MFRL=217,225,233;MMQ=60,60,60;MPOS=30,5;NALOD=2.10,0.406;NLOD=-1.126e+00,3.17;POPAF=6.00,6.00;RPA=16,15,17;RU=A;STR;STRQ=1;TLOD=7.09,4.78	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1/2:30,14,6:0.258,0.144:50:1,1,1:10,7,1:22,11,5:9,21,6,14	0/0:26,9,5:0.210,0.113:40:0,1,0:9,2,2:17,7,3:9,17,4,10
+NC_000022.11	16572122	.	C	A	.	map_qual	AS_FilterStatus=map_qual;AS_SB_TABLE=19,18|2,2;DP=41;ECNT=1;ECNTH=1;GERMQ=62;MBQ=20,20;MFRL=147,147;MMQ=60,21;MPOS=54;NALOD=-1.079e+00;NLOD=3.31;POPAF=6.00;TLOD=7.07	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:16,4:0.231:20:5,2:4,0:9,2:8,8,2,2	0/0:21,0:0.077:21:10,0:1,0:11,0:11,10,0,0
+NC_000023.11	71141256	.	G	GCAGCAGCAGCAGCAACAGCAA	.	normal_artifact;slippage;weak_evidence	AS_FilterStatus=weak_evidence;AS_SB_TABLE=71,132|2,2;DP=220;ECNT=1;ECNTH=1;GERMQ=93;MBQ=20,20;MFRL=145,152;MMQ=60,60;MPOS=7;NALOD=5.57;NLOD=17.10;POPAF=6.00;RPA=2,3;RU=CAGCAGCAGCAGCAACAGCAA;STR;STRQ=1;TLOD=4.98	GT:AD:AF:DP:F1R2:F2R1:FAD:SB	0/1:102,2:0.021:104:59,0:29,1:89,1:35,67,1,1	0/0:101,2:0.022:103:60,0:24,1:86,1:36,65,1,1
+NC_000018.10	51054859	.	C	G	.	PASS	DP=88;SOMATIC;SS=2;SSC=23;GPV=1E0;SPV=4.0595E-3	GT:GQ:DP:RD:AD:FREQ:DP4	0/0:.:42:42:0:0%:28,14,0,0	0/1:.:46:38:8:17.39%:17,21,4,4
+NC_000023.11	71141250	.	G	A	.	PASS	DP=175;SS=1;SSC=3;GPV=3.5775E-3;SPV=4.373E-1	GT:GQ:DP:RD:AD:FREQ:DP4	0/0:.:80:73:3:3.95%:36,37,1,2	0/1:.:95:82:5:5.75%:39,43,3,2
+NC_000023.11	71141262	.	G	A	.	PASS	DP=199;SS=1;SSC=3;GPV=8.6763E-4;SPV=4.8701E-1	GT:GQ:DP:RD:AD:FREQ:DP4	0/0:.:90:85:4:4.49%:43,42,1,3	0/1:.:109:100:6:5.66%:51,49,2,4
+NC_000023.11	71141322	.	G	C	.	PASS	DP=204;SOMATIC;SS=2;SSC=15;GPV=1E0;SPV=2.5864E-2	GT:GQ:DP:RD:AD:FREQ:DP4	0/0:.:91:91:0:0%:42,49,0,0	0/1:.:113:105:6:5.41%:46,59,4,2
+NC_000023.11	71141301	.	A	ACAGCAACACCAG	.	PASS	DP=198;SS=1;SSC=0;GPV=2.7328E-29;SPV=9.8899E-1	GT:GQ:DP:RD:AD:FREQ:DP4	0/1:.:88:38:42:52.5%:22,16,17,25	0/1:.:110:64:37:36.63%:31,33,17,20
