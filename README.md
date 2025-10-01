@@ -19,8 +19,8 @@ Use this command to perform mutation calling:
 python mutect2_varscan2_mutation_calling.py reference.fasta tumor.bam normal.bam normal_sample_prefix
 ```
 
-#### iii) Running In-House Pipeline
-Execute the in-house somatic mutation calling pipeline with the following commands:
+#### iii) Running OncoVAR Pipeline
+Execute the OncoVAR somatic mutation calling pipeline with the following commands:
 ```bash
 python pipeline_for_somatic_mut_calling.py reference.fasta normal.bam tumor.bam
 python identify_cancer_somatic_mutation_cp.py tumor.vcf normal.vcf
