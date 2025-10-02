@@ -1,5 +1,5 @@
 # OncoVAR
-OncoVAR is a custom pipeline for detecting cancer-specific somatic mutations from matched tumor-normal NGS data. It uses samtools and bcftools for variant calling, benchmarks against Mutect2 and VarScan2, and validates findings with a reference gene list to ensure accurate identification of tumor-exclusive mutations.
+OncoVAR is a custom pipeline for detecting cancer-specific somatic mutations from matched tumor-normal NGS data. It uses samtools and bcftools for variant calling, benchmarks against Mutect2 and VarScan2, and validates findings with a reference gene list to ensure accurate identification of tumor-exclusive mutations. Notably, OncoVAR also identified additional mutations in the EGFR, CDKN2A, TP53, and MED12 genes that were not detected by Mutect2 or VarScan2, highlighting its enhanced sensitivity in mutation detection.
 
 
 ### Requirement
